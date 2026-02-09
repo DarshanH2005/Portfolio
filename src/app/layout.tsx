@@ -4,14 +4,13 @@ import "@/resources/custom.css";
 
 import classNames from "classnames";
 
+import type { opacity, SpacingToken } from "@once-ui-system/core";
 import {
   Background,
   Column,
   Flex,
   Meta,
-  opacity,
   RevealFx,
-  SpacingToken,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from "@/components";
 import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
@@ -45,6 +44,8 @@ export default async function RootLayout({
       )}
     >
       <head>
+        <link rel="icon" href="/images/avatar.jpg" type="image/jpeg" />
+        {/* biome-ignore security/noDangerouslySetInnerHtml: Theme initialization must run before rendering */}
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{
