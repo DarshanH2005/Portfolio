@@ -1,0 +1,354 @@
+/* Premium Custom Theme - Sleek Modern Portfolio */
+
+:root {
+  /* Custom premium violet/purple brand colors */
+  --scheme-brand-100: #0d0015;
+  --scheme-brand-200: #1a0033;
+  --scheme-brand-300: #2d0057;
+  --scheme-brand-400: #4a0080;
+  --scheme-brand-500: #6b21a8;
+  --scheme-brand-600: #8b5cf6;
+  --scheme-brand-700: #a78bfa;
+  --scheme-brand-800: #c4b5fd;
+  --scheme-brand-900: #ddd6fe;
+  --scheme-brand-1000: #ede9fe;
+  --scheme-brand-1100: #f5f3ff;
+  --scheme-brand-1200: #faf8ff;
+  --scheme-brand-600-10: rgba(139, 92, 246, 0.1);
+  --scheme-brand-600-30: rgba(139, 92, 246, 0.3);
+  --scheme-brand-600-50: rgba(139, 92, 246, 0.5);
+
+  /* Custom indigo accent colors */
+  --scheme-accent-100: #0a0a1a;
+  --scheme-accent-200: #12122d;
+  --scheme-accent-300: #1e1e4a;
+  --scheme-accent-400: #3730a3;
+  --scheme-accent-500: #4f46e5;
+  --scheme-accent-600: #6366f1;
+  --scheme-accent-700: #818cf8;
+  --scheme-accent-800: #a5b4fc;
+  --scheme-accent-900: #c7d2fe;
+  --scheme-accent-1000: #e0e7ff;
+  --scheme-accent-1100: #eef2ff;
+  --scheme-accent-1200: #f5f7ff;
+  --scheme-accent-600-10: rgba(99, 102, 241, 0.1);
+  --scheme-accent-600-30: rgba(99, 102, 241, 0.3);
+  --scheme-accent-600-50: rgba(99, 102, 241, 0.5);
+
+  /* Premium dark neutral - rich slate tones */
+  --scheme-neutral-100: #020617;
+  --scheme-neutral-200: #0f172a;
+  --scheme-neutral-300: #1e293b;
+  --scheme-neutral-400: #334155;
+  --scheme-neutral-500: #475569;
+  --scheme-neutral-600: #64748b;
+  --scheme-neutral-700: #94a3b8;
+  --scheme-neutral-800: #cbd5e1;
+  --scheme-neutral-900: #e2e8f0;
+  --scheme-neutral-1000: #f1f5f9;
+  --scheme-neutral-1100: #f8fafc;
+  --scheme-neutral-1200: #ffffff;
+  --scheme-neutral-600-10: rgba(100, 116, 139, 0.1);
+  --scheme-neutral-600-30: rgba(100, 116, 139, 0.3);
+  --scheme-neutral-600-50: rgba(100, 116, 139, 0.5);
+}
+
+/* ========================================
+   PREMIUM ANIMATIONS & EFFECTS
+   ======================================== */
+
+/* Smooth fade-in animation for elements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* ========================================
+   GLASSMORPHISM & CARD EFFECTS
+   ======================================== */
+
+/* Premium glass card effect */
+[data-surface="translucent"] {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background: rgba(15, 23, 42, 0.7) !important;
+  border: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Hover glow effect on cards/buttons */
+button:hover,
+a[href]:not([class*="no-effect"]):hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Premium button styling */
+button[data-variant="primary"],
+button[data-variant="secondary"] {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+}
+
+button[data-variant="primary"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+button[data-variant="primary"]:hover::before {
+  left: 100%;
+}
+
+/* ========================================
+   TYPOGRAPHY ENHANCEMENTS
+   ======================================== */
+
+/* Gradient text for headings */
+h1,
+[data-variant*="display-strong"] {
+  background: linear-gradient(135deg, #f8fafc 0%, #a78bfa 50%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle text shadow for depth */
+h2,
+h3 {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   AVATAR & IMAGE ENHANCEMENTS
+   ======================================== */
+
+/* Premium avatar styling with glow */
+[class*="Avatar"] img,
+img[src*="avatar"] {
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+[class*="Avatar"] img:hover,
+img[src*="avatar"]:hover {
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.4) !important;
+  transform: scale(1.02);
+}
+
+/* ========================================
+   PROJECT CARDS & BADGES
+   ======================================== */
+
+/* Project card hover effects */
+[class*="ProjectCard"],
+[class*="project"] {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+[class*="ProjectCard"]:hover,
+[class*="project"]:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15) !important;
+}
+
+/* Badge enhancements */
+[class*="Badge"],
+[data-badge] {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.2),
+    rgba(99, 102, 241, 0.2)
+  ) !important;
+  border: 1px solid rgba(139, 92, 246, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* ========================================
+   SCROLL & REVEAL ANIMATIONS
+   ======================================== */
+
+/* Smooth scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8b5cf6, #6366f1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #a78bfa, #818cf8);
+}
+
+/* ========================================
+   LINKS & INTERACTIVE ELEMENTS
+   ======================================== */
+
+/* Premium link hover effect */
+a {
+  transition: all 0.2s ease !important;
+}
+
+a:hover {
+  color: #a78bfa !important;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(139, 92, 246, 0.4);
+  color: #ffffff;
+}
+
+/* ========================================
+   FOOTER & HEADER ENHANCEMENTS
+   ======================================== */
+
+/* Header glass effect */
+header,
+[class*="Header"] {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+/* Footer subtle glow */
+footer,
+[class*="Footer"] {
+  border-top: 1px solid rgba(139, 92, 246, 0.1) !important;
+}
+
+/* ========================================
+   LINE DECORATIONS
+   ======================================== */
+
+/* Gradient lines */
+[class*="Line"],
+hr {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 92, 246, 0.5),
+    transparent
+  ) !important;
+}
+
+/* ========================================
+   LOADING & TRANSITIONS
+   ======================================== */
+
+/* Page transition */
+main {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Smooth image loading */
+img {
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease !important;
+}
+
+/* ========================================
+   RESPONSIVE ENHANCEMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  h1,
+  [data-variant*="display-strong"] {
+    background: linear-gradient(135deg, #f8fafc 0%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ========================================
+   FOCUS STATES (Accessibility)
+   ======================================== */
+
+:focus-visible {
+  outline: 2px solid #8b5cf6 !important;
+  outline-offset: 2px !important;
+}
+
+/* ========================================
+   SKILL TAGS & TECH STACK
+   ======================================== */
+
+[class*="Tag"],
+[data-tag] {
+  background: rgba(139, 92, 246, 0.15) !important;
+  border: 1px solid rgba(139, 92, 246, 0.25) !important;
+  transition: all 0.2s ease !important;
+}
+
+[class*="Tag"]:hover,
+[data-tag]:hover {
+  background: rgba(139, 92, 246, 0.25) !important;
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  transform: translateY(-1px);
+}
