@@ -1,0 +1,35 @@
+.hackathonCard {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-l, 24px);
+  background: var(--surface-background);
+  border: 1px solid var(--neutral-alpha-weak);
+  overflow: hidden;
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+  animation: float 8s ease-in-out infinite;
+  transform-style: preserve-3d;
+  will-change: transform;
+
+  &:hover {
+    animation-play-state: paused;
+    border-color: var(--brand-alpha-medium);
+    box-shadow: 0 8px 32px var(--brand-alpha-medium);
+  }
+}
+
+.teamText {
+  font-style: italic;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+:global {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+}

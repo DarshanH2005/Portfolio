@@ -13,6 +13,7 @@ import {
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
 import { Projects } from "@/components/work/Projects";
+import { FeaturedHackathon } from "@/components/FeaturedHackathon";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -130,6 +131,9 @@ export default function Home() {
         </Column>
       </Column>
       
+      {/* Featured Hackathon Win */}
+      <FeaturedHackathon />
+
       {/* Featured Project */}
       <RevealFx translateY="16" delay={0.6}>
         <Projects range={[1, 1]} />
