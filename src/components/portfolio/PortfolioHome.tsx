@@ -1,99 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { HeroExperience } from "./HeroExperience";
 import { ProjectShowcase } from "./ProjectShowcase";
 export function PortfolioHome() {
-  const art = useRef<HTMLDivElement>(null);
-  const [motion, setMotion] = useState(false);
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setMotion(!query.matches);
-    const update = () => setMotion(!query.matches);
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
   return (
     <div className="portfolio-home">
-      <section
-        className={motion ? "hero motion-on" : "hero"}
-        aria-labelledby="hero-title"
-        onPointerMove={(event) => {
-          if (!motion || event.pointerType !== "mouse" || !art.current) return;
-          const bounds = event.currentTarget.getBoundingClientRect();
-          const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-          const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-          art.current.style.transform =
-            "translate3d(" + x * 18 + "px," + y * 14 + "px,0) rotate(" + x * 3 + "deg)";
-        }}
-        onPointerLeave={() => {
-          if (art.current) art.current.style.transform = "";
-        }}
-      >
-        <div className="hero-topline">
-          <span>PORTFOLIO — VOL. 2026</span>
-          <span>12.97° N &nbsp; 77.59° E</span>
-        </div>
-        <h1 id="hero-title" className="hero-name">
-          DARSHAN
-          <span className="hero-h">
-            {" "}
-            H<span className="lime-period">.</span>
-          </span>
-        </h1>
-        <div ref={art} className="hero-art" aria-hidden="true">
-          <img
-            src="/images/chrome-knot.webp"
-            alt=""
-            width="1536"
-            height="1024"
-            fetchPriority="high"
-          />
-          <span className="art-cross cross-one">+</span>
-          <span className="art-cross cross-two">+</span>
-        </div>
-        <div className="hero-side-note">
-          <span>FULL STACK</span>
-          <span>MOBILE</span>
-          <span>AI EXPLORATIONS</span>
-        </div>
-        <div className="hero-intro">
-          <span className="eyebrow">ENGINEER. BUILDER. EXPLORER.</span>
-          <p>
-            From an idea
-            <br />
-            to something <em>real.</em>
-          </p>
-          <span className="hero-intro-detail">
-            I build web & mobile products.
-            <br />
-            Based in Bengaluru. Driven by curiosity.
-          </span>
-          <Link href="/work" className="round-link">
-            <span>Explore my work</span>
-            <span className="round-arrow" aria-hidden="true">
-              ↗
-            </span>
-          </Link>
-        </div>
-        <div className="hero-bottom">
-          <a href="#selected-work" className="scroll-link">
-            <span className="scroll-line" aria-hidden="true" />
-            SCROLL TO EXPLORE
-          </a>
-          <button
-            className="motion-toggle"
-            onClick={() => {
-              setMotion(!motion);
-              if (art.current) art.current.style.transform = "";
-            }}
-            aria-pressed={motion}
-          >
-            MOTION {motion ? "ON" : "OFF"}
-            <span aria-hidden="true">{motion ? "Ⅱ" : "▷"}</span>
-          </button>
-          <span className="hero-edition">DESIGNED TO MOVE FORWARD ↗</span>
-        </div>
-      </section>
+      <HeroExperience />
       <section className="intro-strip">
         <span className="eyebrow">A LITTLE CONTEXT /</span>
         <p>

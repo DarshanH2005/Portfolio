@@ -1,0 +1,458 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 800px;
+  height: calc(100svh - 106px);
+  max-height: 1080px;
+  overflow: clip;
+  padding: 27px 4.2% 0;
+  background: radial-gradient(ellipse at 71% 58%, #20241a 0%, #10110f 51%);
+}
+
+.topline,
+.bottom,
+.exhibitLabel,
+.exhibitSide,
+.exhibitFoot {
+  font-family: var(--font-code), monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .035em;
+}
+.topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  color: var(--muted);
+}
+.separator {
+  color: var(--lime);
+  margin: 0 15px;
+}
+.name {
+  position: relative;
+  z-index: 1;
+  margin: 27px 0 0 -.012em;
+  font-size: clamp(84px, 14.5vw, 240px);
+  letter-spacing: -.075em;
+  line-height: 0.98;
+  font-weight: 900;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.name > span {
+  color: var(--lime);
+}
+.intro {
+  position: absolute;
+  z-index: 4;
+  left: 4.2%;
+  bottom: 155px;
+  width: 35%;
+}
+.intro > span {
+  color: var(--lime);
+}
+.intro p {
+  font-size: clamp(26px, 2.5vw, 39px);
+  letter-spacing: -.04em;
+  line-height: 1.17;
+  margin: 22px 0 20px;
+}
+.intro em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.description {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.intro > a {
+  margin-top: 26px;
+}
+.exhibit {
+  position: absolute;
+  z-index: 2;
+  left: 35%;
+  right: 1%;
+  top: 145px;
+  bottom: 134px;
+}
+.exhibit::before {
+  content: "";
+  position: absolute;
+  width: 56%;
+  height: 9%;
+  bottom: 5%;
+  left: 21%;
+  background: radial-gradient(ellipse, #0007, transparent 67%);
+  pointer-events: none;
+}
+.sculpture {
+  position: absolute;
+  inset: 0;
+}
+.sculpture canvas {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 450ms ease;
+}
+.sculpture[data-ready="true"] canvas {
+  opacity: 1;
+}
+.sculpture canvas:focus-visible {
+  outline: 1px dashed var(--lime);
+  outline-offset: -25px;
+  border-radius: 45%;
+}
+.fallback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: lighten;
+  mask-image: radial-gradient(ellipse, #000 25%, transparent 70%);
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.sculpture[data-ready="true"] .fallback {
+  opacity: 0;
+}
+.exhibitLabel {
+  position: absolute;
+  z-index: 3;
+  left: 8%;
+  top: 13%;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  color: #aeb49f;
+  pointer-events: none;
+}
+.registration {
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 300;
+  color: #798568;
+}
+.exhibitLabel > span:last-child {
+  font-size: 11px;
+  line-height: 1.7;
+}
+.exhibitSide {
+  position: absolute;
+  right: 5%;
+  top: 37%;
+  writing-mode: vertical-rl;
+  color: #858d7a;
+  letter-spacing: .17em;
+  pointer-events: none;
+}
+.exhibitFoot {
+  position: absolute;
+  left: 10%;
+  right: 11%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #a3aa94;
+  pointer-events: none;
+}
+.exhibitFoot > span:nth-child(2) {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  letter-spacing: 0;
+}
+.controls {
+  position: absolute;
+  z-index: 5;
+  left: 42%;
+  right: 8%;
+  bottom: 79px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+.studyPicker {
+  display: flex;
+  margin: 0;
+  min-width: 0;
+  border: 1px solid #454b39;
+  background: #15180fcc;
+  padding: 5px;
+  border-radius: 50px;
+}
+.studyPicker button {
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 30px;
+  background: transparent;
+  color: #c4c9b9;
+  font-size: 13px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  transition: background-color 180ms ease, color 180ms ease, transform 160ms var(--ease-out);
+}
+.studyPicker button > span {
+  font: 10px var(--font-code), monospace;
+  opacity: 0.6;
+}
+.studyPicker button[aria-pressed="true"] {
+  background: var(--lime);
+  color: var(--ink);
+}
+.surfaceButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  padding: 12px 0;
+  color: #aeb49f;
+  font-size: 12px;
+  transition: color 180ms ease, transform 160ms var(--ease-out);
+}
+.surfaceButton[aria-pressed="true"] {
+  color: var(--lime);
+}
+.bottom {
+  position: absolute;
+  z-index: 5;
+  bottom: 0;
+  left: 4.2%;
+  right: 4.2%;
+  min-height: 58px;
+  border-top: 1px solid #353b2b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.scrollLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+.scrollLink > span {
+  color: var(--lime);
+  font-size: 24px;
+}
+.motionButton {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 0 12px 12px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  white-space: nowrap;
+}
+.motionButton > span {
+  color: var(--lime);
+  font-size: 15px;
+}
+.studyPicker button:active,
+.surfaceButton:active,
+.motionButton:active {
+  transform: scale(0.97);
+}
+.controls button:disabled,
+.motionButton:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+@media (hover: hover) and (pointer: fine) {
+  .studyPicker button:not([aria-pressed="true"]):not(:disabled):hover {
+    background: #2c3222;
+    color: #fff;
+  }
+  .surfaceButton:not(:disabled):hover,
+  .motionButton:not(:disabled):hover,
+  .scrollLink:hover {
+    color: var(--lime);
+  }
+}
+@media (min-width: 1700px) {
+  .exhibit {
+    top: 190px;
+    left: 34%;
+  }
+  .intro {
+    bottom: 200px;
+  }
+}
+@media (max-width: 1100px) {
+  .hero {
+    min-height: 750px;
+  }
+  .topline {
+    font-size: 10px;
+  }
+  .intro {
+    width: 39%;
+    bottom: 145px;
+  }
+  .intro p {
+    font-size: 29px;
+  }
+  .exhibit {
+    left: 34%;
+    right: -6%;
+    top: 145px;
+    bottom: 156px;
+  }
+  .exhibitLabel {
+    top: 8%;
+  }
+  .exhibitSide {
+    right: 11%;
+  }
+  .controls {
+    left: 40%;
+    right: 4.2%;
+  }
+  .studyPicker button {
+    padding: 11px 13px;
+  }
+  .hint {
+    font-size: 9px;
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    min-height: 1000px;
+    height: auto;
+    max-height: none;
+    padding: 25px 6% 0;
+  }
+  .topline {
+    font-size: 10px;
+  }
+  .topline > span:last-child {
+    display: none;
+  }
+  .name {
+    font-size: 14vw;
+    margin-top: 28px;
+  }
+  .exhibit {
+    left: 0;
+    right: 0;
+    top: 132px;
+    bottom: auto;
+    height: 430px;
+  }
+  .exhibitLabel {
+    left: 7%;
+    top: 8%;
+    gap: 11px;
+  }
+  .exhibitSide {
+    right: 6%;
+    top: 28%;
+    font-size: 10px;
+  }
+  .exhibitFoot {
+    left: 7%;
+    right: 7%;
+    bottom: 10px;
+  }
+  .exhibitFoot > span:nth-child(2) {
+    font-size: 15px;
+  }
+  .controls {
+    top: 571px;
+    bottom: auto;
+    left: 6%;
+    right: 6%;
+    gap: 13px;
+  }
+  .studyPicker {
+    flex: 1;
+    justify-content: space-between;
+  }
+  .studyPicker button {
+    flex: 1;
+    justify-content: center;
+    font-size: 12px;
+    padding: 11px 10px;
+    gap: 6px;
+  }
+  .surfaceButton > span {
+    display: none;
+  }
+  .surfaceButton {
+    padding: 12px 4px;
+  }
+  .intro {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 513px;
+    padding-bottom: 105px;
+  }
+  .intro p {
+    font-size: clamp(26px, 6.6vw, 38px);
+    margin: 18px 0;
+  }
+  .intro > span {
+    font-size: 11px;
+  }
+  .description {
+    font-size: 14px;
+  }
+  .intro > a {
+    margin-top: 20px;
+  }
+  .bottom {
+    left: 6%;
+    right: 6%;
+    min-height: 66px;
+    font-size: 10px;
+  }
+  .hint {
+    display: none;
+  }
+}
+@media (max-width: 380px) {
+  .exhibit {
+    top: 122px;
+    height: 395px;
+  }
+  .controls {
+    top: 533px;
+    gap: 8px;
+  }
+  .studyPicker button {
+    padding: 10px 8px;
+  }
+  .studyPicker button > span {
+    display: none;
+  }
+  .intro {
+    margin-top: 488px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sculpture canvas,
+  .fallback,
+  .studyPicker button,
+  .surfaceButton {
+    transition: none;
+  }
+}
