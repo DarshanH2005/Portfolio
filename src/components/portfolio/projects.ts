@@ -1,0 +1,67 @@
+export const selectedProjects = [
+  {
+    number: "01",
+    slug: "lagnam-matrimony",
+    name: "Lagnam",
+    descriptor: "Real connections. A real-world release.",
+    category: "CLIENT WORK / MOBILE",
+    year: "2026",
+    tags: ["React Native", "Razorpay", "Google Play"],
+    description:
+      "A paid freelance build for Smart Space Technologies. From client requirements to a production Android app, delivered independently in approximately 15 days.",
+    image: "/images/projects/lagnam/screen-1.webp",
+    className: "lagnam",
+  },
+  {
+    number: "02",
+    slug: "parisar-netra-net-zero-campus",
+    name: "Parisar-Netra",
+    descriptor: "Smarter campuses. Less wasted energy.",
+    category: "HACKATHON / AI + IOT",
+    year: "2026",
+    tags: ["React", "ESP32", "Gemini"],
+    description:
+      "Connecting edge hardware and AI to address campus energy waste. Built with Team Detox; first prize at CITI-ZEN 2026 TERRABYTE.",
+    image: "/images/projects/parisar-netra/hackathon-01.jpeg",
+    className: "parisar",
+  },
+  {
+    number: "03",
+    slug: "aipasta-ai-models-playground",
+    name: "AIPasta",
+    descriptor: "One playground. Different perspectives.",
+    category: "EXPERIMENT / GENERATIVE AI",
+    year: "2026",
+    tags: ["Next.js", "Node.js", "LLMs"],
+    description:
+      "An ongoing experiment in bringing multiple language models into one interface, with side-by-side responses and persistent conversations.",
+    image: "/images/projects/aipasta/cover.png",
+    className: "aipasta",
+  },
+  {
+    number: "04",
+    slug: "meetease-video-conferencing-platform",
+    name: "MeetEase",
+    descriptor: "Built to bring people into the same room.",
+    category: "PERSONAL PROJECT / REAL-TIME WEB",
+    year: "2025",
+    tags: ["WebRTC", "WebSockets", "React"],
+    description:
+      "A full-stack video conferencing project exploring real-time calls, screen sharing, and messaging.",
+    image: "/images/projects/meetease/cover.png",
+    className: "meetease",
+  },
+  {
+    number: "05",
+    slug: "stayvista-airbnb-clone",
+    name: "StayVista",
+    descriptor: "A full-stack exploration of booking a stay.",
+    category: "PERSONAL PROJECT / FULL STACK",
+    year: "2024",
+    tags: ["MERN", "Stripe", "MongoDB"],
+    description:
+      "A property-booking project covering listings, search, authentication, and payment integration.",
+    image: "/images/projects/project-01/cover-01.jpg",
+    className: "stayvista",
+  },
+];

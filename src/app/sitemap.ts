@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import { getPosts } from "@/utils/utils";
 import { baseURL, routes as routesConfig } from "@/resources";
 
@@ -21,5 +22,5 @@ export default async function sitemap() {
     lastModified: new Date().toISOString().split("T")[0],
   }));
 
-  return [...routes, ...blogs, ...works];
+  return [...routes, ...(routesConfig["/blog"] ? blogs : []), ...works];
 }

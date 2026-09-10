@@ -14,7 +14,7 @@ import {
 import { home, person } from "./index";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL: string = "https://darshan-portfolio.com";
+const baseURL: string = process.env.NEXT_PUBLIC_SITE_URL || "https://darshanh.me";
 
 const routes: RoutesConfig = {
   "/": true,
@@ -27,7 +27,7 @@ const routes: RoutesConfig = {
 const display: DisplayConfig = {
   location: true,
   time: true,
-  themeSwitcher: true,
+  themeSwitcher: false,
 };
 
 // Enable password protection on selected routes
