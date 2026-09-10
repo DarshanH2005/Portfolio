@@ -1,5 +1,6 @@
 /* Darshan H — Selected Work. Shared art direction for every public page. */
 :root {
+  --site-header-height: clamp(72px, 10svh, 96px);
   --ink: #10110f;
   --paper: #f1f2e9;
   --lime: #d9ff43;
@@ -89,7 +90,7 @@ img {
   transform: translateY(0);
 }
 .site-header {
-  height: 106px;
+  height: var(--site-header-height);
   padding: 0 4.2%;
   display: flex;
   align-items: center;
@@ -1089,7 +1090,7 @@ button:active,
     scroll-padding-top: 30px;
   }
   .site-header {
-    height: 82px;
+    height: var(--site-header-height);
     padding: 0 6%;
   }
   .wordmark {
