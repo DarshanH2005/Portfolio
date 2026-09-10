@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { routes } from "@/resources";
 import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
@@ -14,6 +16,7 @@ export async function generateMetadata() {
 }
 
 export default function Blog() {
+  if (!routes["/blog"]) notFound();
   return (
     <Column maxWidth="m" paddingTop="24">
       <Schema

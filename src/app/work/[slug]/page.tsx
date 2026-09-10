@@ -1,146 +1,110 @@
 import { notFound } from "next/navigation";
-import { getPosts } from "@/utils/utils";
-import {
-  Meta,
-  Schema,
-  AvatarGroup,
-  Button,
-  Column,
-  Flex,
-  Heading,
-  Media,
-  Text,
-  SmartLink,
-  Row,
-  Avatar,
-  Line,
-} from "@once-ui-system/core";
-import { baseURL, about, person, work } from "@/resources";
-import { formatDate } from "@/utils/formatDate";
-import { ScrollToHash, CustomMDX } from "@/components";
-import { Carousel } from "@once-ui-system/core";
+import Link from "next/link";
 import type { Metadata } from "next";
-import { Projects } from "@/components/work/Projects";
-
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const posts = getPosts(["src", "app", "work", "projects"]);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { getPosts } from "@/utils/utils";
+import { selectedProjects } from "@/components/portfolio/projects";
+export async function generateStaticParams() {
+  return getPosts(["src", "app", "work", "projects"]).map((post) => ({ slug: post.slug }));
 }
-
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ slug: string | string[] }>;
-}): Promise<Metadata> {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
-
-  const posts = getPosts(["src", "app", "work", "projects"]);
-  const post = posts.find((post) => post.slug === slugPath);
-
+}: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPosts(["src", "app", "work", "projects"]).find((post) => post.slug === slug);
   if (!post) return {};
-
-  return Meta.generate({
+  return {
     title: post.metadata.title,
     description: post.metadata.summary,
-    baseURL: baseURL,
-    image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
-    path: `${work.path}/${post.slug}`,
-  });
+    openGraph: { images: post.metadata.images[0] ? [post.metadata.images[0]] : [] },
+  };
 }
-
-export default async function Project({
-  params,
-}: {
-  params: Promise<{ slug: string | string[] }>;
-}) {
-  const routeParams = await params;
-  const slugPath = Array.isArray(routeParams.slug)
-    ? routeParams.slug.join("/")
-    : routeParams.slug || "";
-
-  const post = getPosts(["src", "app", "work", "projects"]).find((post) => post.slug === slugPath);
-
-  if (!post) {
-    notFound();
-  }
-
-  const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
-    })) || [];
-
+export default async function Project({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getPosts(["src", "app", "work", "projects"]).find((post) => post.slug === slug);
+  if (!post) notFound();
+  const index = selectedProjects.findIndex((project) => project.slug === slug);
+  const project = selectedProjects[index];
+  const next = selectedProjects[(index + 1) % selectedProjects.length];
+  const lagnam = slug === "lagnam-matrimony";
   return (
-    <Column as="section" maxWidth="m" horizontal="center" gap="l">
-      <Schema
-        as="blogPosting"
-        baseURL={baseURL}
-        path={`${work.path}/${post.slug}`}
-        title={post.metadata.title}
-        description={post.metadata.summary}
-        datePublished={post.metadata.publishedAt}
-        dateModified={post.metadata.publishedAt}
-        image={
-          post.metadata.image || `/api/og/generate?title=${encodeURIComponent(post.metadata.title)}`
-        }
-        author={{
-          name: person.name,
-          url: `${baseURL}${about.path}`,
-          image: `${baseURL}${person.avatar}`,
-        }}
-      />
-      <Column maxWidth="s" gap="16" horizontal="center" align="center">
-        <SmartLink href="/work">
-          <Text variant="label-strong-m">Projects</Text>
-        </SmartLink>
-        <Text variant="body-default-xs" onBackground="neutral-weak" marginBottom="12">
-          {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-        </Text>
-        <Heading variant="display-strong-m">{post.metadata.title}</Heading>
-      </Column>
-      <Row marginBottom="32" horizontal="center">
-        <Row gap="16" vertical="center">
-          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
-          <Text variant="label-default-m" onBackground="brand-weak">
-            {post.metadata.team?.map((member, idx) => (
-              <span key={member.name}>
-                {idx > 0 && (
-                  <Text as="span" onBackground="neutral-weak">
-                    ,{" "}
-                  </Text>
-                )}
-                <SmartLink href={member.linkedIn}>{member.name}</SmartLink>
-              </span>
-            ))}
-          </Text>
-        </Row>
-      </Row>
+    <article className="project-detail">
+      <Link href="/work" className="detail-back">
+        ← ALL PROJECTS
+      </Link>
+      <header className="detail-head">
+        <span className="eyebrow">
+          {project?.category || "SELECTED WORK"} / {project?.year}
+        </span>
+        <h1>{post.metadata.title}</h1>
+        <p className="detail-summary">{post.metadata.summary}</p>
+        <div className="detail-meta">
+          <div>
+            <span>CONTRIBUTION</span>
+            {post.metadata.team?.[0]?.role || "Developer"}
+          </div>
+          {lagnam && (
+            <>
+              <div>
+                <span>CLIENT</span>Smart Space Technologies
+              </div>
+              <div>
+                <span>DELIVERED</span>March 2026 · ~15 days
+              </div>
+            </>
+          )}
+          <div>
+            <span>TECHNOLOGY</span>
+            {project?.tags.join(" / ")}
+          </div>
+        </div>
+        <div className="detail-links">
+          {post.metadata.link && (
+            <a
+              className="text-link"
+              href={post.metadata.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {lagnam ? "View on Google Play" : "Visit project"} ↗
+            </a>
+          )}
+          {post.metadata.github && (
+            <a
+              className="text-link"
+              href={post.metadata.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Source code ↗
+            </a>
+          )}
+        </div>
+      </header>
       {post.metadata.images.length > 0 && (
-        <Column fillWidth radius="m" style={{ overflow: "hidden" }}>
-          <Carousel
-            sizes="(max-width: 960px) 100vw, 960px"
-            items={post.metadata.images.map((image: string, idx: number) => ({
-              slide: image,
-              alt: `${post.metadata.title} - image ${idx + 1}`,
-            }))}
-          />
-        </Column>
+        <div className={lagnam ? "detail-gallery mobile-gallery" : "detail-gallery"}>
+          {post.metadata.images.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt={
+                post.metadata.title +
+                " — " +
+                (lagnam ? "Play Store screenshot " : "project image ") +
+                (i + 1)
+              }
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
       )}
-      <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
-        <CustomMDX source={post.content} />
-      </Column>
-      <Column fillWidth gap="40" horizontal="center" marginTop="40">
-        <Line maxWidth="40" />
-        <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
-          Related projects
-        </Heading>
-        <Projects exclude={[post.slug]} range={[2]} />
-      </Column>
-      <ScrollToHash />
-    </Column>
+      <div className="detail-body">
+        <MDXRemote source={post.content} />
+      </div>
+      <Link href={"/work/" + next.slug} className="next-project">
+        <span>NEXT PROJECT / {next.number}</span>
+        <strong>{next.name} ↗</strong>
+      </Link>
+    </article>
   );
 }

@@ -1,50 +1,28 @@
-import { Row, IconButton, SmartLink, Text } from "@once-ui-system/core";
 import { person, social } from "@/resources";
-import styles from "./Footer.module.scss";
-
-export const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <Row as="footer" fillWidth padding="8" horizontal="center" s={{ direction: "column" }}>
-      <Row
-        className={styles.mobile}
-        maxWidth="m"
-        paddingY="8"
-        paddingX="16"
-        gap="16"
-        horizontal="between"
-        vertical="center"
-        s={{
-          direction: "column",
-          horizontal: "center",
-          align: "center",
-        }}
-      >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">{person.name}</Text>
-          <Text onBackground="neutral-weak">
-            / Built with ❤️ in Bengaluru
-          </Text>
-        </Text>
-        <Row gap="16">
-          {social.map(
-            (item) =>
-              item.link && (
-                <IconButton
-                  key={item.name}
-                  href={item.link}
-                  icon={item.icon}
-                  tooltip={item.name}
-                  size="s"
-                  variant="ghost"
-                />
-              ),
-          )}
-        </Row>
-      </Row>
-      <Row height="80" hide s={{ hide: false }} />
-    </Row>
-  );
-};
+export const Footer = () => (
+  <footer id="contact" className="contact-section">
+    <div className="contact-top">
+      <span className="eyebrow">HAVE SOMETHING IN MIND?</span>
+      <span className="eyebrow">BENGALURU, INDIA · OPEN TO ENGINEERING ROLES</span>
+    </div>
+    <a className="contact-title" href={"mailto:" + person.email}>
+      LET’S BUILD<span aria-hidden="true">↗</span>
+    </a>
+    <div className="footer-bottom">
+      <a href={"mailto:" + person.email}>{person.email}</a>
+      <div className="footer-socials">
+        {social
+          .filter((item) => item.name !== "Email")
+          .map((item) => (
+            <a key={item.name} href={item.link} target="_blank" rel="noopener noreferrer">
+              {item.name} ↗
+            </a>
+          ))}
+      </div>
+      <span>© {new Date().getFullYear()} DARSHAN H</span>
+      <a href="#main" aria-label="Back to top">
+        BACK TO TOP ↑
+      </a>
+    </div>
+  </footer>
+);
