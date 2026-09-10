@@ -85,7 +85,15 @@ export function HeroSculpture({ motion, study, wireframe, onStatus }: Props) {
         new THREE.TorusKnotGeometry(1.3, 0.36, 200, 28, 1, 1),
         new THREE.TorusKnotGeometry(1.24, 0.3, 200, 28, 3, 5),
       ];
-      for (const shape of shapes) shape.center();
+      const sculptureRadius = 2.3;
+      for (const shape of shapes) {
+        shape.center();
+        shape.computeBoundingSphere();
+        const radius = shape.boundingSphere?.radius;
+        if (!radius) throw new Error("Sculpture geometry has no measurable bounds");
+        const scale = sculptureRadius / radius;
+        shape.scale(scale, scale, scale);
+      }
       const geometry = shapes[0].clone();
       const material = new THREE.MeshPhysicalMaterial({
         color: 0xd8dfd0,
@@ -134,8 +142,14 @@ export function HeroSculpture({ motion, study, wireframe, onStatus }: Props) {
         if (!width || !height) return;
         renderer.setSize(width, height);
         camera.aspect = width / height;
-        // Keep the entire silhouette inside the narrow mobile stage.
-        camera.position.setLength(camera.aspect < 1 ? 10.4 / camera.aspect : 10.4);
+        // Fit a rotation-safe sphere to the tighter field of view, with breathing room.
+        // All studies share this radius, so changing shape cannot crop or shrink the art.
+        const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+        const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
+        const distance =
+          sculptureRadius / Math.sin(Math.min(verticalFov, horizontalFov) / 2) / 0.84;
+        camera.position.setLength(distance);
+        controls.saveState();
         camera.updateProjectionMatrix();
         wake();
       };
