@@ -34,35 +34,35 @@ const display: DisplayConfig = {
 // Set password in the .env file, refer to .env.example
 const protectedRoutes: ProtectedRoutesConfig = {};
 
-// Import premium fonts - Inter for modern feel
-import { Inter } from "next/font/google";
-import { JetBrains_Mono } from "next/font/google";
+// A compact editorial system: condensed geometry for display, calm text, and a precise mono layer.
+import { Archivo, DM_Mono, Manrope } from "next/font/google";
 
-const heading = Inter({
+const heading = Archivo({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700", "800", "900"],
 });
 
-const body = Inter({
+const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const label = Inter({
+const label = Manrope({
   variable: "--font-label",
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "600"],
+  weight: ["500", "600", "700"],
 });
 
-const code = JetBrains_Mono({
+const code = DM_Mono({
   variable: "--font-code",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500"],
 });
 
 const fonts: FontsConfig = {
