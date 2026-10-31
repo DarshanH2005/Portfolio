@@ -1,21 +1,109 @@
 "use client";
 import Link from "next/link";
-import { HeroExperience } from "./HeroExperience";
+import { useEffect, useRef, useState } from "react";
 import { ProjectShowcase } from "./ProjectShowcase";
 export function PortfolioHome() {
+  const art = useRef<HTMLDivElement>(null);
+  const [motion, setMotion] = useState(false);
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setMotion(!query.matches);
+    const update = () => setMotion(!query.matches);
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
   return (
     <div className="portfolio-home">
-      <HeroExperience />
+      <section
+        className={motion ? "hero motion-on" : "hero"}
+        aria-labelledby="hero-title"
+        onPointerMove={(event) => {
+          if (!motion || event.pointerType !== "mouse" || !art.current) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+          const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+          art.current.style.transform = `translate3d(${x * 18}px,${y * 14}px,0) rotate(${x * 3}deg)`;
+        }}
+        onPointerLeave={() => {
+          if (art.current) art.current.style.transform = "";
+        }}
+      >
+        <div className="hero-topline">
+          <span>PORTFOLIO — VOL. 2026</span>
+          <span>12.97° N &nbsp; 77.59° E</span>
+        </div>
+        <h1 id="hero-title" className="hero-name">
+          DARSHAN
+          <span className="hero-h">
+            {" "}
+            H<span className="lime-period">.</span>
+          </span>
+        </h1>
+        <div ref={art} className="hero-art" aria-hidden="true">
+          <img
+            src="/images/chrome-knot.webp"
+            alt=""
+            width="1536"
+            height="1024"
+            fetchPriority="high"
+          />
+          <span className="art-cross cross-one">+</span>
+          <span className="art-cross cross-two">+</span>
+        </div>
+        <div className="hero-side-note">
+          <span>FULL STACK</span>
+          <span>MOBILE</span>
+          <span>RELIABILITY & AI SYSTEMS</span>
+        </div>
+        <div className="hero-intro">
+          <span className="eyebrow">ENGINEER. BUILDER. EXPLORER.</span>
+          <p>
+            From an idea
+            <br />
+            to something <em>real.</em>
+          </p>
+          <span className="hero-intro-detail">
+            I build products and test their boundaries.
+            <br />
+            Based in Bengaluru. Driven by curiosity.
+          </span>
+          <Link href="/work" className="round-link">
+            <span>Explore my work</span>
+            <span className="round-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </Link>
+        </div>
+        <div className="hero-bottom">
+          <a href="#selected-work" className="scroll-link">
+            <span className="scroll-line" aria-hidden="true" />
+            SCROLL TO EXPLORE
+          </a>
+          <button
+            type="button"
+            className="motion-toggle"
+            onClick={() => {
+              setMotion(!motion);
+              if (art.current) art.current.style.transform = "";
+            }}
+            aria-pressed={motion}
+          >
+            MOTION {motion ? "ON" : "OFF"}
+            <span aria-hidden="true">{motion ? "Ⅱ" : "▷"}</span>
+          </button>
+          <span className="hero-edition">DESIGNED TO MOVE FORWARD ↗</span>
+        </div>
+      </section>
       <section className="intro-strip">
         <span className="eyebrow">A LITTLE CONTEXT /</span>
         <p>
-          I like figuring things out.
+          Good engineering starts with judgment.
           <br />
-          Then <span>making them work.</span>
+          Then <span>evidence that it works.</span>
         </p>
         <div className="intro-strip-note">
-          From React interfaces at Samsung R&D to independently shipping a client’s Android app. I
-          learn by building, and build to solve something.
+          I use AI to accelerate implementation. I own the context, technical decisions, review,
+          failure checks, and the result that reaches the user.
         </div>
       </section>
       <section id="selected-work" className="work-section">
@@ -30,9 +118,9 @@ export function PortfolioHome() {
             </h2>
           </div>
           <p>
-            Client products, team efforts,
+            Runtime security, agent reliability,
             <br />
-            and a few curious experiments.
+            and a client product taken to release.
           </p>
         </div>
         <ProjectShowcase />
@@ -56,12 +144,12 @@ export function PortfolioHome() {
             BY DEFAULT<span>.</span>
           </h2>
           <p>
-            An Information Science student, a developer, and someone with a growing list of startup
-            ideas.
+            An Information Science engineering student building across full-stack products, runtime
+            security, and evaluation for tool-using agents.
           </p>
           <p>
-            I’m preparing for my next engineering opportunity. Outside the code: following what’s
-            happening in AI, open-world games, and time with friends.
+            My focus is the work around the code: defining the problem, finding failure modes,
+            reviewing the implementation, and making regressions reproducible.
           </p>
           <Link href="/about" className="round-link">
             <span>A little more about me</span>
@@ -86,14 +174,20 @@ export function PortfolioHome() {
             <h3>
               Smart Space Technologies<small>Freelance React Native Developer</small>
             </h3>
-            <p>Lagnam Matrimony. Requirements, development, payments, and Google Play release.</p>
+            <p>
+              Five-day AI-assisted client build. Mobile app, VPS backend, authenticated chat, and
+              verified payments.
+            </p>
           </div>
           <div>
-            <span>JUL 2025 — FEB 2026</span>
+            <span>JUL 2025 — JAN 2026</span>
             <h3>
-              Samsung R&D<small>Frontend Developer Intern</small>
+              Samsung R&D<small>Project Developer Intern · PRISM</small>
             </h3>
-            <p>Modular React interfaces for internal CRM and employee workflow tools.</p>
+            <p>
+              Reusable React CRM features, REST APIs, troubleshooting, and team code reviews before
+              delivery.
+            </p>
           </div>
           <div>
             <span>COMMUNITY</span>

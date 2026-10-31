@@ -49,7 +49,7 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
                 <span>CLIENT</span>Smart Space Technologies
               </div>
               <div>
-                <span>DELIVERED</span>March 2026 · ~15 days
+                <span>DELIVERED</span>Five-day client build
               </div>
             </>
           )}

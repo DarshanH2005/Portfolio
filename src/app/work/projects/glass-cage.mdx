@@ -1,0 +1,25 @@
+---
+title: "Glass Cage 2.0"
+publishedAt: "2026-10-01"
+summary: "A runtime dependency firewall for Node.js and Python, built around package attribution, access policies, and live inspection."
+images: []
+team:
+  - name: "Darshan H"
+    role: "Developer"
+---
+
+## The problem
+
+A dependency can perform sensitive actions while running inside an application. Glass Cage explores how to attribute those actions to packages and enforce runtime boundaries instead of relying only on a dependency list.
+
+## Implementation
+
+The deployed system combines asynchronous package attribution with Linux seccomp/eBPF to intercept sensitive-file access and unauthorized network calls. Per-package policies define access boundaries. Canary honeytokens and DNS-entropy alerts provide additional signals for investigation.
+
+## Making decisions inspectable
+
+A React/Three.js GeoIP dashboard brings runtime activity into view. Stack-trace inspection helps investigate where a connection originated, while connection approval controls support explicit access decisions.
+
+## Engineering focus
+
+The useful question is which package performed an action, under which policy, and what evidence supports the decision. Runtime visibility and enforcement are the focus of this work. This project is not a claim that all supply-chain attacks are prevented.

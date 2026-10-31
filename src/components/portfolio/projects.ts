@@ -1,6 +1,32 @@
 export const selectedProjects = [
   {
     number: "01",
+    slug: "glass-cage",
+    name: "Glass Cage 2.0",
+    descriptor: "Make dependency behavior visible. Enforce its boundaries.",
+    category: "RUNTIME SECURITY / DEPENDENCY FIREWALL",
+    year: "2026",
+    tags: ["TypeScript", "Python", "Linux eBPF"],
+    description:
+      "A deployed runtime dependency firewall for Node.js and Python. Package attribution, sensitive-file and network interception, per-package policies, and a live inspection dashboard.",
+    image: "",
+    className: "glasscage",
+  },
+  {
+    number: "02",
+    slug: "crashforge",
+    name: "CrashForge",
+    descriptor: "A failure is useful when you can reproduce it.",
+    category: "AGENT RELIABILITY / CHAOS TESTING",
+    year: "2026",
+    tags: ["Python", "pytest", "SQLite"],
+    description:
+      "A released CLI that injects faults into tool-using agents, detects duplicate side effects with ledger invariants, reduces failing fault plans, and exports offline regression tests.",
+    image: "",
+    className: "crashforge",
+  },
+  {
+    number: "03",
     slug: "lagnam-matrimony",
     name: "Lagnam",
     descriptor: "Real connections. A real-world release.",
@@ -8,12 +34,12 @@ export const selectedProjects = [
     year: "2026",
     tags: ["React Native", "Razorpay", "Google Play"],
     description:
-      "A paid freelance build for Smart Space Technologies. From client requirements to a production Android app, delivered independently in approximately 15 days.",
+      "An independent five-day client build using AI-assisted development. React Native/Expo, a deployed Node.js backend, authenticated chat, and Razorpay verification with duplicate-payment checks.",
     image: "/images/projects/lagnam/screen-1.webp",
     className: "lagnam",
   },
   {
-    number: "02",
+    number: "04",
     slug: "parisar-netra-net-zero-campus",
     name: "Parisar-Netra",
     descriptor: "Smarter campuses. Less wasted energy.",
@@ -26,7 +52,7 @@ export const selectedProjects = [
     className: "parisar",
   },
   {
-    number: "03",
+    number: "05",
     slug: "aipasta-ai-models-playground",
     name: "AIPasta",
     descriptor: "One playground. Different perspectives.",
@@ -39,7 +65,7 @@ export const selectedProjects = [
     className: "aipasta",
   },
   {
-    number: "04",
+    number: "06",
     slug: "meetease-video-conferencing-platform",
     name: "MeetEase",
     descriptor: "Built to bring people into the same room.",
@@ -52,7 +78,7 @@ export const selectedProjects = [
     className: "meetease",
   },
   {
-    number: "05",
+    number: "07",
     slug: "stayvista-airbnb-clone",
     name: "StayVista",
     descriptor: "A full-stack exploration of booking a stay.",

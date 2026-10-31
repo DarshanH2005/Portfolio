@@ -2,6 +2,7 @@ import "@once-ui-system/core/css/styles.css";
 import "@once-ui-system/core/css/tokens.css";
 import "@/resources/custom.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseURL),
   title: { default: "Darshan H — Engineer. Builder. Explorer.", template: "%s — Darshan H" },
   description:
-    "Full-stack and mobile developer in Bengaluru. Explore Lagnam Matrimony, my Samsung R&D internship, and experiments across web, AI and IoT.",
+    "Darshan H: full-stack engineering, runtime security, and agent reliability. Explore Glass Cage, CrashForge, and an independently shipped client application.",
   openGraph: {
     title: "Darshan H — Selected Work",
     description:
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

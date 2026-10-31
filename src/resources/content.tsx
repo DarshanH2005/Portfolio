@@ -5,7 +5,7 @@ const person: Person = {
   firstName: "Darshan",
   lastName: "H",
   name: `Darshan H`,
-  role: "Full-Stack & Mobile Developer",
+  role: "Software Engineer · Full Stack, Security & AI Reliability",
   avatar: "/images/avatar.jpg",
   email: "darshan1970h@gmail.com",
   location: "Asia/Kolkata", // Bengaluru, Karnataka, India
@@ -114,8 +114,8 @@ const about: About = {
     experiences: [
       {
         company: "Samsung R&D Institute India - Bangalore",
-        timeframe: "July 2025 - February 2026",
-        role: "Frontend Developer Intern",
+        timeframe: "July 2025 - January 2026",
+        role: "Project Developer Intern · PRISM",
         achievements: [
           <>
             Developed pixel-perfect frontend UI components from Figma designs for Internal CRM &
