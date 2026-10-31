@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseURL),
   title: { default: "Darshan H — Engineer. Builder. Explorer.", template: "%s — Darshan H" },
   description:
-    "Full-stack and mobile developer in Bengaluru. Explore Lagnam Matrimony, my Samsung R&D internship, and experiments across web, AI and IoT.",
+    "Darshan H: full-stack engineering, runtime security, and agent reliability. Explore Glass Cage, CrashForge, and an independently shipped client application.",
   openGraph: {
     title: "Darshan H — Selected Work",
     description:

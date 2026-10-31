@@ -48,7 +48,7 @@ export const Header = () => {
           aria-current={pathname?.startsWith("/work") ? "page" : undefined}
           onClick={() => setOpen(false)}
         >
-          Work <sup>05</sup>
+          Work <sup>07</sup>
         </Link>
         <Link
           href="/about"

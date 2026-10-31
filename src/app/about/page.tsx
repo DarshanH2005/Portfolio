@@ -25,9 +25,9 @@ export default function About() {
         <span className="eyebrow">HELLO, I’M DARSHAN.</span>
         <div>
           <h2>
-            I learn by making.
+            Build with intent.
             <br />
-            And there’s a lot left to make.
+            Verify with evidence.
           </h2>
           <p>
             I’m pursuing a B.E. in Information Science at Cambridge Institute of Technology,
@@ -40,17 +40,24 @@ export default function About() {
             requirements to its Google Play release.
           </p>
           <p>
-            I use AI throughout my development process, alongside the full-stack foundations I built
-            before it. New frameworks are an opportunity to learn; delivering a working product is
-            the goal.
+            I use AI-assisted development with responsibility for the result. That means defining
+            what should be built, providing useful context, reviewing proposed changes, and checking
+            where the system fails. Generated code is a starting point for engineering judgment.
           </p>
           <p>
-            Right now, I’m focusing on data structures, algorithms, and placement preparation.
-            Longer term, I want to turn some of my own ideas into a business.
+            Glass Cage explores how dependencies behave at runtime and how access can be controlled.
+            CrashForge injects faults into tool-using agents, checks independent invariants, and
+            turns failures into replayable regression evidence. These projects reflect where I want
+            to go deeper: security boundaries, observability, and trustworthy delivery.
           </p>
           <Link href="/work/lagnam-matrimony" className="text-link">
             Explore the client project ↗
           </Link>
+          <p>
+            <a href="/darshan-h-resume.pdf" className="text-link" download>
+              Download my resume ↗
+            </a>
+          </p>
         </div>
       </section>
       <section className="about-toolkit">
@@ -58,18 +65,24 @@ export default function About() {
         <div>
           <h2>THE TOOLKIT.</h2>
           {[
-            { name: "Interfaces", items: "React · Next.js · React Native · TypeScript · Redux" },
             {
-              name: "Behind the scenes",
-              items: "Node.js · Express · MongoDB · PostgreSQL · Redis",
+              name: "Product engineering",
+              items: "React · Next.js · React Native/Expo · TypeScript · Node.js · REST APIs",
             },
             {
-              name: "Connected experiences",
-              items: "WebRTC · WebSockets · REST APIs · Payment integrations",
+              name: "Reliability & security",
+              items:
+                "pytest · Fault injection · Regression replay · Linux · seccomp/eBPF · Runtime access policies",
             },
             {
-              name: "Exploration & delivery",
-              items: "Python · Machine learning · Git · Docker · AWS",
+              name: "AI & evaluation",
+              items:
+                "Tool-using agents · Agent evaluation · PyTorch · scikit-learn · Embeddings · RAG",
+            },
+            {
+              name: "Data & delivery",
+              items:
+                "Python · SQL · PostgreSQL · SQLite · MongoDB · Git · Docker · AWS · VPS deployment",
             },
           ].map((group) => (
             <div className="toolkit-row" key={group.name}>
@@ -77,6 +90,31 @@ export default function About() {
               <p>{group.items}</p>
             </div>
           ))}
+        </div>
+      </section>
+      <section className="about-story">
+        <span className="eyebrow">HOW I APPROACH THE WORK</span>
+        <div>
+          <h2>Context. Judgment. Accountability.</h2>
+          <p>
+            I start with the user, constraints, and a definition of success. That context guides
+            both my own implementation and the tasks I give AI tools.
+          </p>
+          <p>
+            I review boundaries where mistakes have consequences: access to files, authentication,
+            payments, retries, and persistent state. A plausible response is not enough; I look for
+            observable behavior and independent checks.
+          </p>
+          <p>
+            When something fails, I want a small reproducer and a regression check. CrashForge is a
+            concrete expression of that approach. I am continuing to develop these skills through
+            shipped work, rather than treating a tool list as proof of expertise.
+          </p>
+          <p>
+            My AI Biometric Attendance System combines 128-dimensional facial embeddings and an SVM
+            classifier with speaker verification. Teacher and student workflows connect to Supabase
+            PostgreSQL, with bcrypt password hashing and QR-code onboarding.
+          </p>
         </div>
       </section>
       <section className="offscreen">

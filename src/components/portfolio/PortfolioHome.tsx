@@ -53,7 +53,7 @@ export function PortfolioHome() {
         <div className="hero-side-note">
           <span>FULL STACK</span>
           <span>MOBILE</span>
-          <span>AI EXPLORATIONS</span>
+          <span>RELIABILITY & AI SYSTEMS</span>
         </div>
         <div className="hero-intro">
           <span className="eyebrow">ENGINEER. BUILDER. EXPLORER.</span>
@@ -63,7 +63,7 @@ export function PortfolioHome() {
             to something <em>real.</em>
           </p>
           <span className="hero-intro-detail">
-            I build web & mobile products.
+            I build products and test their boundaries.
             <br />
             Based in Bengaluru. Driven by curiosity.
           </span>
@@ -97,13 +97,13 @@ export function PortfolioHome() {
       <section className="intro-strip">
         <span className="eyebrow">A LITTLE CONTEXT /</span>
         <p>
-          I like figuring things out.
+          Good engineering starts with judgment.
           <br />
-          Then <span>making them work.</span>
+          Then <span>evidence that it works.</span>
         </p>
         <div className="intro-strip-note">
-          From React interfaces at Samsung R&D to independently shipping a client’s Android app. I
-          learn by building, and build to solve something.
+          I use AI to accelerate implementation. I own the context, technical decisions, review,
+          failure checks, and the result that reaches the user.
         </div>
       </section>
       <section id="selected-work" className="work-section">
@@ -118,9 +118,9 @@ export function PortfolioHome() {
             </h2>
           </div>
           <p>
-            Client products, team efforts,
+            Runtime security, agent reliability,
             <br />
-            and a few curious experiments.
+            and a client product taken to release.
           </p>
         </div>
         <ProjectShowcase />
@@ -144,12 +144,12 @@ export function PortfolioHome() {
             BY DEFAULT<span>.</span>
           </h2>
           <p>
-            An Information Science student, a developer, and someone with a growing list of startup
-            ideas.
+            An Information Science engineering student building across full-stack products, runtime
+            security, and evaluation for tool-using agents.
           </p>
           <p>
-            I’m preparing for my next engineering opportunity. Outside the code: following what’s
-            happening in AI, open-world games, and time with friends.
+            My focus is the work around the code: defining the problem, finding failure modes,
+            reviewing the implementation, and making regressions reproducible.
           </p>
           <Link href="/about" className="round-link">
             <span>A little more about me</span>
@@ -174,14 +174,20 @@ export function PortfolioHome() {
             <h3>
               Smart Space Technologies<small>Freelance React Native Developer</small>
             </h3>
-            <p>Lagnam Matrimony. Requirements, development, payments, and Google Play release.</p>
+            <p>
+              Five-day AI-assisted client build. Mobile app, VPS backend, authenticated chat, and
+              verified payments.
+            </p>
           </div>
           <div>
-            <span>JUL 2025 — FEB 2026</span>
+            <span>JUL 2025 — JAN 2026</span>
             <h3>
-              Samsung R&D<small>Frontend Developer Intern</small>
+              Samsung R&D<small>Project Developer Intern · PRISM</small>
             </h3>
-            <p>Modular React interfaces for internal CRM and employee workflow tools.</p>
+            <p>
+              Reusable React CRM features, REST APIs, troubleshooting, and team code reviews before
+              delivery.
+            </p>
           </div>
           <div>
             <span>COMMUNITY</span>

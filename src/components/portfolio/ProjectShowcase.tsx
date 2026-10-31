@@ -14,7 +14,26 @@ export function ProjectShowcase({ all = false }: { all?: boolean }) {
               <span>{project.category}</span>
               <span>{project.year}</span>
             </div>
-            {project.className === "lagnam" ? (
+            {project.className === "glasscage" || project.className === "crashforge" ? (
+              <div className="engineering-cover">
+                <span className="eyebrow">
+                  {project.className === "glasscage"
+                    ? "OBSERVE / ATTRIBUTE / ENFORCE"
+                    : "INJECT / DETECT / REDUCE / REPLAY"}
+                </span>
+                <strong>{project.name}</strong>
+                <p>
+                  {project.className === "glasscage"
+                    ? "Every dependency has a boundary."
+                    : "Find the failure. Keep the evidence."}
+                </p>
+                <span className="engineering-cover-detail">
+                  {project.className === "glasscage"
+                    ? "Package policies · Runtime inspection · Connection approvals"
+                    : "Ledger invariants · Delta debugging · Regression exports"}
+                </span>
+              </div>
+            ) : project.className === "lagnam" ? (
               <>
                 <div className="lagnam-word">
                   lagnam<span>MATRIMONY</span>

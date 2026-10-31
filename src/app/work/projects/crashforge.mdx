@@ -1,0 +1,29 @@
+---
+title: "CrashForge"
+publishedAt: "2026-10-01"
+summary: "A Python CLI for chaos-testing tool-using agents and turning observed failures into offline regression evidence."
+images: []
+team:
+  - name: "Darshan H"
+    role: "Developer"
+---
+
+## The problem
+
+A tool call can commit a change and then time out. An agent that retries without understanding that boundary can create duplicate side effects. CrashForge tests these failure paths rather than judging an agent only by its final response.
+
+## Inject faults. Check independent evidence.
+
+The released Python CLI injects after-commit timeouts, stale reads, and malformed results. Independent ledger-based invariants detect duplicate side effects. SQLite and NDJSON persist the evidence for inspection.
+
+## Reduce the failure
+
+Budgeted delta debugging reduces fault plans while preserving their failure signatures. A smaller reproducer makes it easier to investigate which conditions caused the behavior.
+
+## Keep it as a regression
+
+Offline regression exports and replay-divergence checks for LLM traces connect investigation to repeatable checks. The focus is a quality loop: introduce a fault, detect the violated invariant, preserve evidence, and replay the failure after a change.
+
+## Scope
+
+These checks cover the injected faults and recorded traces. They provide concrete evidence about those scenarios, rather than a general guarantee that an agent is reliable in every environment.

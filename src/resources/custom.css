@@ -1,4 +1,32 @@
 /* Darshan H — Selected Work. Shared art direction for every public page. */
+.engineering-cover {
+  min-height: 100%;
+  padding: 100px 7% 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  background: #17211b;
+}
+.engineering-cover strong {
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(42px, 7vw, 100px);
+  line-height: 1;
+  letter-spacing: -.055em;
+  color: #d9ff43;
+}
+.engineering-cover p {
+  font-size: clamp(20px, 2.3vw, 32px);
+  max-width: 650px;
+}
+.engineering-cover-detail {
+  font-size: 14px;
+  color: #aebdab;
+  line-height: 1.6;
+}
+.crashforge .engineering-cover {
+  background: #1e2028;
+}
 :root {
   --site-header-height: clamp(72px, 10svh, 96px);
   --ink: #10110f;

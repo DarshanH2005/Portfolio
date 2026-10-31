@@ -1,7 +1,7 @@
 ---
 title: "Lagnam Matrimony"
 publishedAt: "2026-03-01"
-summary: "A paid freelance React Native app for Smart Space Technologies, delivered independently from requirements through Google Play deployment in approximately 15 days."
+summary: "An independently delivered, AI-assisted client application built in five days, with a deployed backend, authenticated chat, and payment verification."
 images:
   - "/images/projects/lagnam/screen-1.webp"
   - "/images/projects/lagnam/screen-2.webp"
@@ -16,7 +16,7 @@ link: "https://play.google.com/store/apps/details?id=com.smartspacetechnologies.
 
 ## A client brief, taken all the way to release
 
-Lagnam Matrimony is a matrimonial Android app developed for Smart Space Technologies. This was paid freelance work, delivered in March 2026 in approximately 15 days. The client owns the product; I independently handled its development and release.
+Lagnam Matrimony is a matrimonial Android app developed for Smart Space Technologies. The application was built end to end in five days using AI-assisted development. I handled the mobile application, Node.js/Express backend deployment to a public VPS, and application setup. The client owns the product.
 
 ## My contribution
 
@@ -27,6 +27,8 @@ I worked from the client's requirements through implementation, testing, and dep
 I came into the project with React and full-stack development experience, but without prior React Native experience. I used AI-assisted development extensively to learn the framework and implement the app, working through the platform-specific pieces required for release.
 
 ## The release details that mattered
+
+MongoDB-backed profiles and preference-based recommendations connect to authenticated Socket.IO chat. Razorpay payments include verification and duplicate-payment checks. These boundaries matter because a successful interface alone does not establish that authentication, messaging, or money movement behaves correctly.
 
 Two areas needed particular attention: configuring the Play Store signing-key identifiers for authentication, and resolving Razorpay integration issues. Both were addressed as part of getting the application ready for production.
 
