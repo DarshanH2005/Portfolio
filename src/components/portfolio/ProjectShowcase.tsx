@@ -95,7 +95,9 @@ export function ProjectShowcase({ all = false }: { all?: boolean }) {
               </div>
             </div>
             <Link className="text-link project-read" href={"/work/" + project.slug}>
-              View project <span aria-hidden="true">↗</span>
+              {project.className === "glasscage" || project.className === "crashforge"
+                ? "Read technical brief"
+                : "View project"} <span aria-hidden="true">↗</span>
             </Link>
           </div>
         </article>

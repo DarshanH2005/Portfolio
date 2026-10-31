@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPosts } from "@/utils/utils";
 import { selectedProjects } from "@/components/portfolio/projects";
+import { TechnicalOverview } from "@/components/portfolio/TechnicalOverview";
 export async function generateStaticParams() {
   return getPosts(["src", "app", "work", "projects"]).map((post) => ({ slug: post.slug }));
 }
@@ -81,6 +82,9 @@ export default async function Project({ params }: { params: Promise<{ slug: stri
           )}
         </div>
       </header>
+      {(slug === "glass-cage" || slug === "crashforge") && (
+        <TechnicalOverview kind={slug === "glass-cage" ? "glass" : "crash"} />
+      )}
       {post.metadata.images.length > 0 && (
         <div className={lagnam ? "detail-gallery mobile-gallery" : "detail-gallery"}>
           {post.metadata.images.map((src, i) => (

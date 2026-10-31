@@ -8,18 +8,40 @@ team:
     role: "Developer"
 ---
 
-## The problem
+## Threat model: code you installed can still cross a boundary
 
-A dependency can perform sensitive actions while running inside an application. Glass Cage explores how to attribute those actions to packages and enforce runtime boundaries instead of relying only on a dependency list.
+A host application legitimately needs secrets, files, and network access. Its third-party packages do not necessarily need the same privileges. A compromised dependency can execute inside that trusted process and attempt to read configuration or contact an unauthorized destination.
 
-## Implementation
+Glass Cage 2.0 is my runtime supply-chain security project for Node.js and Python. I built and deployed a dependency firewall combining asynchronous package attribution, per-package access policies, Linux seccomp/eBPF mechanisms, and a React/Three.js investigation dashboard.
 
-The deployed system combines asynchronous package attribution with Linux seccomp/eBPF to intercept sensitive-file access and unauthorized network calls. Per-package policies define access boundaries. Canary honeytokens and DNS-entropy alerts provide additional signals for investigation.
+## The difficult part is attribution
 
-## Making decisions inspectable
+A process ID tells you which application acted. It does not identify which dependency caused the action. Package-level policy needs a more precise answer, especially when work continues through asynchronous callbacks.
 
-A React/Three.js GeoIP dashboard brings runtime activity into view. Stack-trace inspection helps investigate where a connection originated, while connection approval controls support explicit access decisions.
+The attribution layer connects runtime activity to package context. Stack-trace inspection supports investigation of the initiating code. This is a different responsibility from the operating-system boundary: observing a syscall and explaining its package origin are related, but distinct, problems.
 
-## Engineering focus
+## Observation, policy, and enforcement have different jobs
 
-The useful question is which package performed an action, under which policy, and what evidence supports the decision. Runtime visibility and enforcement are the focus of this work. This project is not a claim that all supply-chain attacks are prevented.
+**Observation** exposes sensitive-file and network activity. **Policy** describes which resources a package may access. **Enforcement** restricts actions at the implemented boundary. **Investigation** helps a human understand why an action was flagged or restricted.
+
+The project combines Linux seccomp/eBPF with application-level attribution. These technologies are not interchangeable: seccomp filters system calls, while eBPF capabilities depend on the hooks and program types used. Neither automatically understands an npm package identity. Ordinary seccomp filters also cannot dereference a pathname pointer to make a complete file-path decision on their own.
+
+That distinction matters when explaining the design: a package-aware file rule requires context beyond a syscall number. The map above separates responsibilities instead of implying a single kernel feature solves the entire problem. See the [Linux kernel seccomp documentation](https://www.kernel.org/doc/html/next/userspace-api/seccomp_filter.html) for the underlying mechanism and its limits.
+
+## Signals should support a decision, not replace it
+
+Canary honeytokens make unexpected access to decoy resources visible. DNS-entropy alerts identify unusually random-looking domain names for review. These signals complement per-package access policies; they are not equivalent to a confirmed compromise.
+
+High-entropy names can occur in legitimate systems. GeoIP provides approximate destination context, not evidence that a connection is malicious. The dashboard combines connection visibility, stack-trace inspection, and approval controls so an operator can investigate the behavior behind a signal.
+
+## What I owned
+
+My implementation spans the Node.js/Python runtime security system, package attribution and access policies, honeytoken and DNS signals, and the React/Three.js dashboard. The dashboard is an inspection surface for the security work; the central engineering contribution is connecting runtime behavior to an attributable, reviewable access decision.
+
+## Boundaries and what to verify
+
+Coverage depends on the instrumented execution paths, Linux mechanisms, and policy configuration. Native code, subprocesses, asynchronous context loss, and missing attribution are important boundary cases to examine before treating a deployment as a complete sandbox.
+
+An evaluation should inspect both allowed and denied actions: a legitimate dependency must keep working, an unauthorized access must be restricted at the intended boundary, and an operator should be able to explain the decision from the evidence. Missing package attribution needs an explicit handling policy rather than a guessed identity.
+
+No latency benchmark, detection-rate percentage, or exhaustive coverage result is claimed here. The walkthrough is illustrative; it does not execute untrusted packages in your browser.

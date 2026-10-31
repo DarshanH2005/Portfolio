@@ -8,22 +8,42 @@ team:
     role: "Developer"
 ---
 
-## The problem
+## Failure model: the write succeeds, the response disappears
 
-A tool call can commit a change and then time out. An agent that retries without understanding that boundary can create duplicate side effects. CrashForge tests these failure paths rather than judging an agent only by its final response.
+An agent calls a booking tool. The server commits the booking, but its response times out. The agent now has an ambiguous outcome: retrying might create a second booking; assuming success might also be wrong in a different execution.
 
-## Inject faults. Check independent evidence.
+CrashForge is my released Python CLI for chaos-testing tool-using AI agents. It injects after-commit timeouts, stale reads, and malformed results, then checks the effects of the agent’s behavior against independent ledger-based invariants.
 
-The released Python CLI injects after-commit timeouts, stale reads, and malformed results. Independent ledger-based invariants detect duplicate side effects. SQLite and NDJSON persist the evidence for inspection.
+## Why the agent’s final answer is not the oracle
 
-## Reduce the failure
+An agent can report success while producing duplicate writes, or report failure after an operation actually committed. A reliability check must inspect persistent effects rather than relying on that description.
 
-Budgeted delta debugging reduces fault plans while preserving their failure signatures. A smaller reproducer makes it easier to investigate which conditions caused the behavior.
+The ledger provides an independent view for invariant checks. In the booking example, the property to investigate is whether one requested operation produced duplicate side effects. The selected scenario above shows the failure boundary; it is an illustration, not a captured production incident.
 
-## Keep it as a regression
+## Fault injection tests the recovery decision
 
-Offline regression exports and replay-divergence checks for LLM traces connect investigation to repeatable checks. The focus is a quality loop: introduce a fault, detect the violated invariant, preserve evidence, and replay the failure after a change.
+After-commit timeouts test whether retries account for an operation that may already have succeeded. Stale reads test decisions made from outdated state. Malformed results test handling of unexpected tool output. These faults exercise different recovery paths, so they should not be collapsed into one generic API-error case.
 
-## Scope
+CrashForge exposes the behavior. A fix belongs in the agent/tool system being tested: for example, idempotency keys and state reconciliation can address particular retry hazards. The testing tool itself does not make external operations idempotent.
 
-These checks cover the injected faults and recorded traces. They provide concrete evidence about those scenarios, rather than a general guarantee that an agent is reliable in every environment.
+## Delta debugging: keep the failure, remove the noise
+
+A failing run can contain many injected faults. Budgeted delta debugging tries smaller fault plans and keeps reductions that preserve the failure signature. The result is a more focused reproducer for investigation.
+
+The budget is a practical constraint: re-running an agent has a cost. A reduced plan should not be described as the globally smallest possible test case. Preserving the same signature matters because simply finding a different failure would not explain the original one.
+
+## From an incident to a regression
+
+SQLite and NDJSON persist execution evidence. Offline regression exports turn observed failures into repeatable checks, while replay-divergence checks for LLM traces flag when replay no longer follows the recorded behavior.
+
+The quality loop is concrete: choose a fault plan, execute the agent, check independent effects, reduce the failing conditions, preserve evidence, and re-run the regression after a change. Replay divergence is useful evidence of a mismatch, not proof that a new execution is necessarily correct or incorrect.
+
+## What I owned
+
+I built and released the Python CLI, fault-injection behavior, independent ledger-based checks, budgeted reduction, evidence persistence, and offline regression exports. The project connects AI-agent behavior with software-testing techniques rather than evaluating only response quality.
+
+## Boundaries and what to verify
+
+Coverage is limited by the chosen faults, tool boundaries, and invariants. A passing test does not establish that an agent is reliable under every failure mode. A recorded trace also does not make future live model outputs deterministic.
+
+Useful evaluation cases include a duplicate-effect failure, a correctly handled ambiguous write, a reducer that preserves the original signature, and a replay that visibly diverges. No benchmark score or reliability percentage is claimed here.
