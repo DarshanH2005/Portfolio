@@ -2,6 +2,7 @@ import "@once-ui-system/core/css/styles.css";
 import "@once-ui-system/core/css/tokens.css";
 import "@/resources/custom.css";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
